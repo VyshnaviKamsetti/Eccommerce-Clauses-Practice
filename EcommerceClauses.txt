@@ -1,0 +1,61 @@
+-----Ecommerece-----
+
+create Table Product(ProductId int, ProductName nvarchar(20) primary key,ProductType nvarchar(20),ProductQuantity int,Price money)
+create Table Customer(CustomerId int ,CustomerName nvarchar(20) Primary key, PhoneNumber numeric(10),Address nvarchar(50),Gender nvarchar(1),Age int)
+create Table Orders(OrderdId int primary key,BuyerName nvarchar(20) Foreign key REFERENCES Customer(CustomerName),Productname nvarchar(20) Foreign key REFERENCES Product(ProductName))
+alter table Customer add PreviousQuantity int 
+select * from Product
+
+select * from Customer
+
+select * from Orders
+
+insert into Product values(1,'Pen','Stationary',30,100)
+insert into Product values(2,'White-Book','Stationary',40,75)
+insert into Product values(3,'Saree','Clothing',100,1399)
+insert into Product values(4,'Shirt','Clothing',300,760)
+insert into Product values(5,'Top','Clothing',300,150)
+insert into Product values(6,'Curten','Home-Decor',150,250)
+insert into Product values(7,'Door-Mat','Home-Decor',200,100)
+insert into Product values(8,'Mixer','Kitchen',30,3000)
+insert into Product values(9,'Stove','Kitchen',20,4000)
+insert into Product values(10,'Dinner-Set','Kitchen',20,10000)
+insert into Product values(11,'Mobile','Gadgets',5000,38000)
+
+select * from Customer  order by CustomerId 
+
+insert into Customer values(1000,'Mohit',58789876,'Hyderabad','M',30,5),(1001,'Vyshnavi',26578876,'CHGIRI','F',22,4),
+(1002,'Sai',5782987567,'Madugupalli','M',24,3),(1003,'Sahiti',67789876,'Vizag','F',25,1),
+(1004,'Mohini',877865767,'Hyderabad','F',30,25),(1005,'kalpana',5878679876,'Ballery','F',70,3),
+(1007,'SheelaKumari',9958789876,'Hyderabad','F',60,1),(1008,'Mohitk',779876,'Kanpur','M',36,8),
+(1009,'Mohitha',58789876,'Hyderabad','M',30,10),(1010,'MohitM',58789876,'Hyderabad','M',30,24)
+insert into Customer values (1010,'Mounika',58789876,'Hyderabad','M',30,24)
+ 
+ truncate table Orders
+
+Insert into Orders values(10000,'Mohit','Pen'),(10001,'Sai','Shirt'),(10002,'Mohit','Shirt'),(10003,'kalpana','Top'),
+(10004,'SheelaKumari','Saree'),(10005,'Sahiti','Pen'),(10006,'Mohit','Stove'),(10007,'Sai','Mobile'),(10008,'Mohit','Pen'),(10009,'Sai','Shirt'),(10010,'Mohit','Shirt'),(10011,'kalpana','Top'),
+(10012,'SheelaKumari','White-Book'),(10013,'Sahiti','Top'),(10014,'Mohit','Stove'),(10015,'Sai','Shirt')
+
+select * from Orders
+
+-----clauses----
+-----ORDER BY CLAUSE-----
+select * from Customer  order by CustomerId 
+select * from Product  order by ProductId 
+
+----GROUP BY CLASUE------
+select Gender ,Count(Gender) as 'GenderCount' from Customer GROUP BY Gender 
+
+-----Having Clause-----
+select ProductType,sum(Price) as 'TotalPrice' from Product group by ProductType having sum(Price) > 20000 order by productType desc
+
+-----Distinct-----
+
+select distinct ProductType, Count(ProductType) as 'ProductCount' from Product group by ProductType order by ProductType desc
+
+-----Where----
+
+Select distinct * from Orders where Productname='Pen'
+----OFF SET------
+Select * from Product order by Price desc OFFSET 3 Rows Fetch next 4 Rows only
